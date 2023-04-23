@@ -1,31 +1,25 @@
-const sketch = p => {
+const agents = [];
 
-    const agents = [];
-
-    p.setup = () => {
-        const canvas = p.createCanvas(400, 400);
-        canvas.parent('#container');
-        canvas.id('p5');
-        
-        p.textSize(8);
-        p.strokeWeight(0.5);
+setup = () => {
+    const canvas = createCanvas(400, 400);
+    canvas.parent('#container');
+    canvas.id('p5');
     
-        for (let i = 0; i < 100; i++) {
-            agents.push(new Agent(p, i));
-        }
+    textSize(8);
+    strokeWeight(0.5);
+
+    for (let i = 0; i < 100; i++) {
+        agents.push(new Agent(i));
     }
-    
-    p.draw = () => {
-        p.background(255);
-        agents.forEach(agent => {
-            agent.update(p, agents);
-        });
-
-        agents.forEach(agent => {
-            agent.draw(p);
-        });
-    }
-    
 }
+    
+draw = () => {
+    background(255);
+    agents.forEach(agent => {
+        agent.update(agents);
+    });
 
-new p5(sketch);
+    agents.forEach(agent => {
+        agent.draw();
+    });
+}
