@@ -27,7 +27,7 @@ class Agent {
         this.wrapBound();
     }
 
-    draw(p) {
+    draw() {
         const V = p5.Vector;
         
         stroke(200);
