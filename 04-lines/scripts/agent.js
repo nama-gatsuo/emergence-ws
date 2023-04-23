@@ -30,14 +30,12 @@ class Agent {
     draw() {
         const V = p5.Vector;
         
-        stroke(200);
         noFill();
-        circle(this.position.x, this.position.y, this.desiredSeparation);
+        stroke(200);
+        //circle(this.position.x, this.position.y, this.separationRadius);
         
-        stroke(0);
+        stroke(255);
         this.drawArrow(V.normalize(this.velocity));
-        
-        fill(255);
         circle(this.position.x, this.position.y, 6);
 
         // noStroke();

@@ -15,8 +15,8 @@ setup = () => {
 
 draw = () => {
     background(255);
-    agents.forEach(agent => {
+    for (const agent of agents) {
         agent.update();
         agent.draw();
-    });
+    }
 }

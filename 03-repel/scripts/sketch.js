@@ -17,13 +17,11 @@ setup = () => {
 draw = () => {
     background(255);
     const mouse = createVector(mouseX, mouseY);
-    agents.forEach(agent => {
+    for (const agent of agents) {
         agent.attract(mouse);
         agent.repel(agents);
         agent.update();
-    });
 
-    agents.forEach(agent => {
         agent.draw();
-    });
+    }
 }

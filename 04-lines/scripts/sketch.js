@@ -5,6 +5,7 @@ setup = () => {
     canvas.parent('#container');
     canvas.id('p5');
     
+    blendMode(ADD);
     textSize(8);
     strokeWeight(0.5);
 
@@ -14,19 +15,20 @@ setup = () => {
 }
 
 draw = () => {
-    background(255);
+    clear();
+    background(0);
     const mouse = createVector(mouseX, mouseY);
-    agents.forEach(agent => {
+    for (const agent of agents) {
         agent.attract(mouse);
         agent.repel(agents);
         agent.update();
-    });
+    }
 
-    stroke(255, 0, 0);
-    //drawConnectorByDist(agents, 50.0);        
-    drawConnectorByLinkage(agents);
+    stroke(255, 100, 100);
+    drawConnectorByDist(agents, 50.0);        
+    //drawConnectorByLinkage(agents);
     //drawConnectorByNearest(agents);
-    agents.forEach(agent => {
-        agent.draw();
-    });
+    // agents.forEach(agent => {
+    //     agent.draw();
+    // });
 }

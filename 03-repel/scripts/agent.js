@@ -58,9 +58,8 @@ class Agent {
         let sum = createVector(0, 0);
         let totalCount = 0;
 
-        agents.forEach(agent => {
+        for (const agent of agents) {
             if (this.index !== agent.index) {
-
                 const dist = V.dist(this.position, agent.position);
                 if (dist > 0 && dist < this.desiredSeparation) {
                     const dir = V.sub(this.position, agent.position).normalize();
@@ -68,9 +67,8 @@ class Agent {
                     sum.add(dir);
                     totalCount++;
                 }
-
             }
-        });
+        }
 
         if (totalCount > 0) {
             sum.div(totalCount);
