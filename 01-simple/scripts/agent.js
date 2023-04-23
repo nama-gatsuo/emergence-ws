@@ -7,7 +7,7 @@ class Agent {
     constructor(index) {        
         this.index = this.padzero(index);
         this.position = createVector(
-            random(0, width), random(0, height)
+            random(width), random(height)
         );
         this.velocity = createVector(
             random(-1, 1), random(-1, 1)
