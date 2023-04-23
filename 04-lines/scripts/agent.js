@@ -4,44 +4,52 @@ class Agent {
     position;
     velocity;
 
+    maxSpeed;
+    maxForce;
     desiredSeparation;
 
     constructor(index) {
         this.index = this.padzero(index);
         this.position = createVector(
-            random(10, width-10), random(10, height-10)
+            random(width), random(height)
         );
         this.velocity = createVector(
             random(-1, 1), random(-1, 1)
         );
-
-        this.desiredSeparation = 40.0;
+        this.maxForce = 0.2;
+        this.maxSpeed = 3.0;
+        this.desiredSeparation = 30;
     }
 
-    update(agents) {
-
-        const V = p5.Vector;
-        this.repel(agents);
-
-        this.position.add(V.mult(this.velocity, 1.0));
+    update() {
+        this.velocity.limit(this.maxSpeed);
+        this.position.add(this.velocity);
         this.wrapBound();
     }
 
     draw() {
+        const V = p5.Vector;
         
         stroke(200);
         noFill();
         circle(this.position.x, this.position.y, this.desiredSeparation);
         
         stroke(0);
-        // this.drawArrow(p, V.normalize(this.velocity));
+        this.drawArrow(V.normalize(this.velocity));
         
         fill(255);
-        circle(this.position.x, this.position.y, 12);
+        circle(this.position.x, this.position.y, 6);
 
         // noStroke();
         // fill(0);
         // text(this.index, this.position.x - 5, this.position.y + 3);
+    }
+    
+    attract(target) {
+        const acceleration = p5.Vector.sub(target, this.position);
+        acceleration.setMag(0.1);
+        acceleration.limit(this.maxForce);
+        this.velocity.add(acceleration);
     }
 
     repel(agents) {
@@ -66,16 +74,13 @@ class Agent {
 
         if (totalCount > 0) {
             sum.div(totalCount);
-            sum.normalize();
-            sum.mult(0.5);
+            sum.setMag(this.maxSpeed);
 
             const steer = V.sub(sum, this.velocity);
-            steer.limit(1.0);
+            steer.limit(this.maxForce);
 
             this.velocity.add(steer);
-            //this.velocity.limit(1.0);
         }
-
 
     }
 
@@ -103,7 +108,6 @@ class Agent {
         push();
         translate(this.position.x, this.position.y);
         rotate(atan2(dir.y, dir.x));
-        line(10, 0, 0, 0);
         line(10, 0, 7, 3);
         line(10, 0, 7, -3);
         pop();

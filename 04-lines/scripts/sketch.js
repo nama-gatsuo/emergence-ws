@@ -15,8 +15,11 @@ setup = () => {
 
 draw = () => {
     background(255);
+    const mouse = createVector(mouseX, mouseY);
     agents.forEach(agent => {
-        agent.update(agents);
+        agent.attract(mouse);
+        agent.repel(agents);
+        agent.update();
     });
 
     stroke(255, 0, 0);

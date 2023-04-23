@@ -5,6 +5,7 @@ class Agent {
     velocity;
 
     maxSpeed;
+    maxForce;
 
     constructor(index) {
         this.index = this.padzero(index);
@@ -14,12 +15,14 @@ class Agent {
         this.velocity = createVector(
             random(-1, 1), random(-1, 1)
         );
+        this.maxForce = 0.2;
         this.maxSpeed = 5.0;
     }
 
     attract(target) {
         const acceleration = p5.Vector.sub(target, this.position);
         acceleration.setMag(0.2);
+        acceleration.limit(this.maxForce);
         this.velocity.add(acceleration);
     }
 
@@ -70,7 +73,6 @@ class Agent {
         push();
         translate(this.position.x, this.position.y);
         rotate(atan2(dir.y, dir.x));
-        line(10, 0, 0, 0);
         line(10, 0, 7, 3);
         line(10, 0, 7, -3);
         pop();
