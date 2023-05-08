@@ -17,7 +17,7 @@ draw = () => {
     background(255);
     const mouse = createVector(mouseX, mouseY);
     for (const agent of agents) {
-        agent.attract(mouse);
+        agent.attract(mouse, 100);
         agent.update();
 
         agent.draw();

@@ -20,10 +20,15 @@ class Agent {
     }
 
     attract(target) {
-        const acceleration = p5.Vector.sub(target, this.position);
-        acceleration.setMag(0.2);
-        acceleration.limit(this.maxForce);
-        this.velocity.add(acceleration);
+        const desiredVelocity = p5.Vector.sub(target, this.position);
+        desiredVelocity.setMag(this.maxSpeed);
+        const distance = p5.Vector.dist(target, this.position);
+        if (distance < radius) {
+            const steeringForce = p5.Vector.sub(desiredVelocity, this.velocity);
+            steeringForce.div(distance / radius);
+            steeringForce.limit(this.maxForce);
+            this.velocity.add(steeringForce);
+        }
     }
 
     update() {
