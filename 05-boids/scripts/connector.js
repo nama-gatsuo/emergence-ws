@@ -11,8 +11,8 @@ const drawConnectorByDist = (agents, dist) => {
     }
 }
 
-// 鋭角をつくらない
-const drawConnectorByLinkage = (agents) => {
+// Relative neighborhood graph
+const drawConnectorByRNG = (agents) => {
     const V = p5.Vector;
 
     for (let i = 0; i < agents.length - 1; i++) {

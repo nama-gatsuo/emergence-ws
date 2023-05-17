@@ -26,7 +26,7 @@ draw = () => {
 
     stroke(255, 100, 100);
     drawConnectorByDist(agents, 50.0);        
-    //drawConnectorByLinkage(agents);
+    //drawConnectorRNG(agents);
     //drawConnectorByNearest(agents);
     // agents.forEach(agent => {
     //     agent.draw();

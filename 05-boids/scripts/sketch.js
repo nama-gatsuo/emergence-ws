@@ -31,7 +31,7 @@ draw = () => {
 
     stroke(255, 0, 0);
     //drawConnectorByDist(agents, 50.0);
-    drawConnectorByLinkage(agents);
+    drawConnectorByRNG(agents);
     //drawConnectorByNearest(agents);
     for (const agent of agents) {
         //agent.draw();
