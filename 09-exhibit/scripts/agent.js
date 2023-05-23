@@ -10,10 +10,6 @@ class Agent {
     alignRadius;
     cohesionRadius;
 
-    t;
-    segments;
-    segLength;
-
     constructor() {
 
         this.position = createVector(
@@ -29,44 +25,16 @@ class Agent {
         this.separationRadius = 25;
         this.alignRadius = 40;
         this.cohesionRadius = 40;
-
-        this.t = 0;
-    
-        this.segments = [];
-        for (let i = 0; i < 3; i++) {
-            this.segments.push(createVector(0, 0));
-        }
-        this.segLength = 10.0;
+        
     }
 
     update() {
         this.velocity.limit(this.maxSpeed);
         this.position.add(this.velocity);
         this.bounceBound();
-        this.updateSegments();
-
-        this.t += this.velocity.mag() * 5.0;
-        this.t = this.t % 360;
     }
 
-    draw() {
-        noStroke();
-        const c = map(sin(radians(this.t)), -1, 1, 0, 255);
-        fill(c);
-        circle(this.position.x, this.position.y, 4);
-        fill(255);
-        for (const s of this.segments) {
-            circle(s.x, s.y, 2);
-        }
-        noFill();
-        stroke(255);
-        this.drawArrow(this.velocity);
-        stroke(128);
-        for (let i = 0; i < this.segments.length - 1; i++) {
-            line(this.segments[i].x, this.segments[i].y, this.segments[i + 1].x, this.segments[i + 1].y);
-        }
-        circle(this.position.x, this.position.y, 8);
-    }
+    draw() {}
     
     attract(target, radius) {
         const V = p5.Vector;
@@ -218,30 +186,5 @@ class Agent {
             pos.y = 0 - pad;
             vel.y *= -1;
         }
-    }
-
-    drawArrow(dir) {
-        push();
-        translate(this.position.x, this.position.y);
-        rotate(atan2(dir.y, dir.x));
-        line(10, 0, 7, 3);
-        line(10, 0, 7, -3);
-        pop();
-    }
-
-    updateSegments() {
-        this.drawgSegments(0, this.position);
-        for (let i = 1; i < this.segments.length; i++) {
-            this.drawgSegments(i, this.segments[i - 1]);
-        }
-    }
-
-    drawgSegments(index, pPrev) {
-        const p = this.segments[index];
-        const dx = pPrev.x - p.x;
-        const dy = pPrev.y - p.y;
-        const angle = atan2(dy, dx);
-        p.x = pPrev.x - cos(angle) * this.segLength;
-        p.y = pPrev.y - sin(angle) * this.segLength;
     }
 }

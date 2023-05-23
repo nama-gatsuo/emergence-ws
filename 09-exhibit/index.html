@@ -41,7 +41,7 @@
         <div id="popup">
             <h2 class="title">テストパターン</h2>
             <p class="name">永松歩</p>
-            <p class="description">Boidsアルゴリズムでのシミュレーション結果に対して、エージェントの位置を用いたVoronoi分割をほどこした。各エージェントは、速度に応じた周期で点滅する。</p>
+            <p class="description">boidsを継承した2種類のエージェントのシミュレーション。1つは、尾を持ち、整列と凝集の強さを周期的に変化させる。もう1つは、整列と凝集をせず、反発の大きさを周期的に変化させる。</p>
             <!-- キャプションの閉ボタン -->
             <div id="close"><a href="#">&times;</a></div>
         </div>
@@ -49,6 +49,7 @@
     <script src="https://unpkg.com/p5@1.6.0/lib/p5.min.js"></script>
     <script src="libs/rhill-voronoi-core.min.js"></script>
     <script src="scripts/agent.js"></script>
+    <script src="scripts/agentVariations.js"></script>
     <script src="scripts/subdiv.js"></script>
     <script src="scripts/sketch.js"></script>
 </html>

@@ -10,7 +10,12 @@ setup = () => {
     strokeWeight(0.5);
 
     for (let i = 0; i < 100; i++) {
-        agents.push(new Agent());
+        if (i % 3 === 0) {
+            agents.push(new BlobAgent());
+        } else {
+            agents.push(new TailAgent());
+        }
+
     }
 
 }
