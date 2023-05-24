@@ -22,14 +22,12 @@ setup = () => {
 
 draw = () => {
     background(0);
-    const mouse = createVector(mouseX, mouseY);
+    
     
     for (const agent of agents) {
 
-        if (mouseIsPressed) {
-            agent.attract(mouse, 200);
-        } else {
-            agent.repel(mouse, 100);
+        for (const touch of touches) {
+            agent.attract(createVector(touch.x, touch.y), 100);
         }
 
         agent.flock(agents);
